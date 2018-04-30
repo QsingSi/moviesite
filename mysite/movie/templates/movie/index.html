@@ -1,0 +1,46 @@
+{% if movie_list %}
+<head>
+    <style>
+#list {
+    background: RGB(227,237,205);
+}
+.simple {
+    display: inline-block;
+}
+#page {
+    margin-left: 25%;
+}
+    </style>
+</head>
+    {% if error_msg %}
+        <p>{{error_msg}}</p>
+    {% endif %}
+    <ul id="list">
+    {% for question in movie_list %}
+    <li><a>{{ question.name }}</a></li>
+    <li><a>{{ question.link }}</a></li>
+    {% empty %}
+        <div class="no-movie">没有所需的电影!</div>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>找不到所需电影.</p>
+{% endif %}
+{% if is_paginated %}
+<div class="simple" id="search">
+    <form method="get" action="{% url 'movie:search' %}">
+        {% csrf_token %}
+        <input type="search" name="q" placeholder="教父" required>
+        <button type="submit">搜索</button>
+    </form>
+</div>
+<div class="simple" id="page">
+    {% if page_obj.has_previous %}
+     <a href="?page={{ page_obj.previous_page_number }}">上一页</a>
+    {% endif %}
+    <span class="current">第 {{ page_obj.number }} 页 / 共 {{ paginator.num_pages }} 页</span>
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}">下一页</a>
+    {% endif %}
+</div>
+{% endif %}

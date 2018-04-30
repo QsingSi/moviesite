@@ -1,0 +1,28 @@
+<div class="btn-group" role="group">
+    <!-- ��һҳ -->
+    <a class="btn btn-default" href="?{{query_params.urlencode}}&page=1">
+        <span class="glyphicon glyphicon-step-backward"></span>
+    </a>
+    <!-- ��һҳ -->{% if movie.has_previous %}
+    <a class="btn btn-default" href="?{{query_params.urlencode}}&page={{skus.previous_page_number}}">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a> {% else %}
+    <a class="btn btn-default disabled">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a> {% endif %}
+    <!-- ��ǰҳ/��ҳ�� -->
+    <a class="btn btn-default disabled">
+        <span>{{movie.number}} of {{movie.paginator.num_pages}}</span>
+    </a>
+    <!-- ��һҳ -->{% if movie.has_next %}
+    <a class="btn btn-default" href="?{{query_params.urlencode}}&page={{skus.next_page_number}}">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a> {% else %}
+    <a class="btn btn-default disabled">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a> {% endif %}
+    <!-- ���һҳ -->
+    <a class="btn btn-default" href="?{{query_params.urlencode}}&page={{skus.paginator.num_pages}}">
+        <span class="glyphicon glyphicon-step-forward"></span>
+    </a>
+</div>
